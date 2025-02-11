@@ -448,13 +448,6 @@ from typing import List
 # Create the FastAPI app
 app = FastAPI()
 
-# Assuming `suggestions_map` is predefined, for example:
-suggestions_map = {
-    "hello": ["Hi there!", "How can I assist you today?"],
-    "help": ["Sure! How can I help?", "What do you need assistance with?"],
-    "bye": ["Goodbye!", "See you later!"]
-}
-
 # Pydantic model to define request format
 class MessageRequest(BaseModel):
     message: str
