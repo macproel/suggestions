@@ -468,17 +468,16 @@ def get_chat_suggestions(message: str) -> List[str]:
         elif isinstance(key, str) and key in message:
             return suggestions_map[key]
     
-    return 0
+    return []
 
 # POST endpoint to handle incoming messages and return suggestions
 @app.post("/get_suggestions/")
 async def get_suggestions(request: MessageRequest):
     message = request.message
     suggestions = get_chat_suggestions(message)
-    if suggestions == 0:
-        # return 404 status code
-        return {"detail": "No suggestions found for the given message."}, 404
-    return {"suggestions": suggestions}
+    if not suggestions:
+        raise HTTPException(status_code=404, detail="Suggestions not found")
+    return {suggestions}
 
 # Run the app with uvicorn:
 # uvicorn main:app --reload
