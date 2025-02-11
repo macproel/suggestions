@@ -477,7 +477,7 @@ async def get_suggestions(request: MessageRequest):
     suggestions = get_chat_suggestions(message)
     if not suggestions:
         raise HTTPException(status_code=404, detail="Suggestions not found")
-    return {suggestions}
+    return {"suggestion":suggestions}
 
 # Run the app with uvicorn:
 # uvicorn main:app --reload
