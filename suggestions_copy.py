@@ -459,7 +459,13 @@ def get_chat_suggestions(message: str) -> List[str]:
 
     # Check for matching keywords in message
     for key in suggestions_map:
-        if key in message:
+        # If the key is a tuple, loop through its elements
+        if isinstance(key, tuple):
+            for sub_key in key:
+                if sub_key in message:
+                    return suggestions_map[key]
+        # If the key is a string, check directly
+        elif isinstance(key, str) and key in message:
             return suggestions_map[key]
     
     return ["I don't have a suggestion for that."]
